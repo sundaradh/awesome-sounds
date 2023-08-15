@@ -1,3 +1,5 @@
+import 'package:awesome_sounds/global/const.dart';
+import 'package:awesome_sounds/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,22 +12,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Awesome Sounds',
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Press a button to play a sound'),
+      theme: ThemeData(
+        scaffoldBackgroundColor: backgroundColor,
+        fontFamily: "Poppins",
+        iconTheme: const IconThemeData(color: primaryColor),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: primaryColor),
+          bodyText2: TextStyle(color: textColor2),
+        ),
       ),
+      home: HomePage(),
+      // home: OnBoard(),S
     );
   }
 }
+
