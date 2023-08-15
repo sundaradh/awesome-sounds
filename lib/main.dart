@@ -10,8 +10,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Awesome Sounds',
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text("Awesome Sounds"),
+      body: Center(
+        child: Text('Press a button to play a sound'),
+      ),
     );
   }
 }
