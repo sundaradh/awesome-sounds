@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: GridView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -30,10 +30,9 @@ class _HomePageState extends State<HomePage> {
               crossAxisSpacing: 15,
               mainAxisSpacing: 15,
             ),
-            children: List.generate(
-              10,
-              (index) => Container(
-                margin: const EdgeInsets.only(top: 20),
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.white,
@@ -51,29 +50,321 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       child: const Icon(Icons.person,
-                          size: 40, color: Colors.blueAccent),
+                          size: 84, color: Colors.blueAccent),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(12),
-                            bottomLeft: Radius.circular(12),
-                          )),
-                      padding: const EdgeInsets.all(12),
-                      child: const Text(
-                        "Motivational",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
+                      
                     ),
                   ],
                 ),
               ),
-            ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.person,
+                          size: 84, color: Colors.blueAccent),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    ),
+                  ],
+                ),
+              ),Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.person,
+                          size: 84, color: Colors.blueAccent),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    ),
+                  ],
+                ),
+              ),Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.person,
+                          size: 84, color: Colors.blueAccent),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    ),
+                  ],
+                ),
+              ),Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.person,
+                          size: 84, color: Colors.blueAccent),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    ),
+                  ],
+                ),
+              ),Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.person,
+                          size: 84, color: Colors.blueAccent),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    ),
+                  ],
+                ),
+              ),Container(
+                margin: const EdgeInsets.only(top: 20, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.person,
+                          size: 84, color: Colors.blueAccent),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 60,
+                        width:double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )),
+                        padding: const EdgeInsets.all(8),
+                        child: const Center(
+                          child:  Text(
+                            "Motivation",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    ),
+                  ],
+                ),
+              ),
+              
+              
+            ],
           ),
         ),
       ),
