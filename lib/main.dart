@@ -1,5 +1,6 @@
 import 'package:awesome_sounds/global/const.dart';
 import 'package:awesome_sounds/screens/home_page.dart';
+import 'package:awesome_sounds/screens/motivational.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: textColor2),
         ),
       ),
-      home: HomePage(),
+      // home: HomePage(),
+      home: Motivational(),
       // home: OnBoard(),S
     );
   }
