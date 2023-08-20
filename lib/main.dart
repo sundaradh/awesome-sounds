@@ -1,5 +1,4 @@
 import 'package:awesome_sounds/global/const.dart';
-import 'package:awesome_sounds/screens/home_page.dart';
 import 'package:awesome_sounds/screens/motivational.dart';
 import 'package:flutter/material.dart';
 
