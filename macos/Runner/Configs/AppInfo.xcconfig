@@ -8,7 +8,7 @@
 PRODUCT_NAME = awesome_sounds
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.awesomeSounds
+PRODUCT_BUNDLE_IDENTIFIER = com.adhikari.awesomeSounds
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.adhikari. All rights reserved.

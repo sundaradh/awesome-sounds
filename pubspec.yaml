@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   just_audio: ^0.9.34
+  just_audio_background: ^0.0.1-beta.10
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -74,7 +75,7 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
-  # example:
+  # adhikari:
   # fonts:
   #   - family: Schyler
   #     fonts:

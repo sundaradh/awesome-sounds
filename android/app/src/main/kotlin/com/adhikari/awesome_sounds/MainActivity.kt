@@ -1,4 +1,4 @@
-package com.example.awesome_sounds
+package com.adhikari.awesome_sounds
 
 import io.flutter.embedding.android.FlutterActivity
 
