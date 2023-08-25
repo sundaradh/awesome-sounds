@@ -1,5 +1,8 @@
 import 'package:awesome_sounds/global/const.dart';
+import 'package:awesome_sounds/screens/focus.dart';
 import 'package:awesome_sounds/screens/motivational.dart';
+import 'package:awesome_sounds/screens/sleep.dart';
+import 'package:awesome_sounds/screens/study.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Awesome Sounds"),
-        backgroundColor: primaryColor,
+        backgroundColor: primaryColor3,
         centerTitle: true,
         elevation: 0,
       ),
@@ -40,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: primaryColor.withOpacity(0.5),
+                        color: primaryColor3.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 12,
                         offset: const Offset(0, 3),
@@ -52,14 +55,14 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         child: const Icon(Icons.person,
-                            size: 84, color: Colors.blueAccent),
+                            size: 84, color: primaryColor),
                       ),
                       Center(
                         child: Container(
                           height: 60,
                           width: double.infinity,
                           decoration: const BoxDecoration(
-                              color: Colors.blueAccent,
+                              color: primaryColor3,
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(12),
@@ -97,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: primaryColor.withOpacity(0.5),
+                        color: primaryColor3.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 12,
                         offset: const Offset(0, 3),
@@ -109,14 +112,14 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         child: const Icon(Icons.person,
-                            size: 84, color: Colors.blueAccent),
+                            size: 84, color: primaryColor),
                       ),
                       Center(
                         child: Container(
                           height: 60,
                           width: double.infinity,
                           decoration: const BoxDecoration(
-                              color: Colors.blueAccent,
+                              color: primaryColor3,
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(12),
@@ -141,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Motivational(),
+                        builder: (context) => const FocusPage (),
                       ),
                       (route) => true);
                 },
@@ -154,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: primaryColor.withOpacity(0.5),
+                        color: primaryColor3.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 12,
                         offset: const Offset(0, 3),
@@ -166,14 +169,14 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         child: const Icon(Icons.person,
-                            size: 84, color: Colors.blueAccent),
+                            size: 84, color: primaryColor),
                       ),
                       Center(
                         child: Container(
                           height: 60,
                           width: double.infinity,
                           decoration: const BoxDecoration(
-                              color: Colors.blueAccent,
+                              color: primaryColor3,
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(12),
@@ -198,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Motivational(),
+                        builder: (context) => const SleepPage(),
                       ),
                       (route) => true);
                 },
@@ -211,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: primaryColor.withOpacity(0.5),
+                        color: primaryColor3.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 12,
                         offset: const Offset(0, 3),
@@ -222,15 +225,15 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         padding: const EdgeInsets.all(12),
-                        child: const Icon(Icons.person,
-                            size: 84, color: Colors.blueAccent),
+                        child: const  Icon(Icons.person,
+                            size: 84, color: primaryColor),
                       ),
                       Center(
                         child: Container(
                           height: 60,
                           width: double.infinity,
                           decoration: const BoxDecoration(
-                              color: Colors.blueAccent,
+                              color: primaryColor3,
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(12),
@@ -255,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Motivational(),
+                        builder: (context) => const Study(),
                       ),
                       (route) => true);
                 },

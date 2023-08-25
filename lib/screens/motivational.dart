@@ -37,7 +37,7 @@ class _MotivationalState extends State<Motivational> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Motivational", style: TextStyle(color: Colors.white)),
-        backgroundColor: primaryColor,
+        backgroundColor: primaryColor3,
       ),
       body: Column(
         children: [
@@ -48,7 +48,7 @@ class _MotivationalState extends State<Motivational> {
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: primaryColor,
+                color: primaryColor3,
               ),
             ),
           ),
@@ -58,7 +58,7 @@ class _MotivationalState extends State<Motivational> {
               onPressed: _togglePlayer,
               icon: Icon(
                 isPlaying ? Icons.pause : Icons.play_arrow,
-                color: primaryColor,
+                color: primaryColor3,
                 size: 40,
               ),
             ),
