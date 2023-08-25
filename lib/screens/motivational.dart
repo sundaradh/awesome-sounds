@@ -13,17 +13,26 @@ class _MotivationalState extends State<Motivational> {
   final _player = AudioPlayer();
   bool isPlaying = false;
 
+  @override
+  void initState() {
+    super.initState();
+    _player.playerStateStream.listen((playerState) {
+      if (mounted) {
+        setState(() {
+          isPlaying = playerState.playing;
+        });
+      }
+    });
+  }
+
   Future<void> _togglePlayer() async {
     if (isPlaying) {
       await _player.pause();
     } else {
-      await _player.setAsset('assets/sounds/focus.mp3');
+      await _player.setAsset('assets/sounds/motivational.mp3');
       _player.setLoopMode(LoopMode.one);
       await _player.play();
     }
-    setState(() {
-      isPlaying = !isPlaying;
-    });
   }
 
   @override
@@ -36,7 +45,7 @@ class _MotivationalState extends State<Motivational> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Motivational", style: TextStyle(color: Colors.white)),
+        title: const Text("Motivation", style: TextStyle(color: Colors.white)),
         backgroundColor: primaryColor3,
       ),
       body: Column(

@@ -10,8 +10,20 @@ class FocusPage extends StatefulWidget {
 }
 
 class _FocusPageState extends State<FocusPage> {
-final _player = AudioPlayer();
+  final _player = AudioPlayer();
   bool isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _player.playerStateStream.listen((playerState) {
+      if (mounted) {
+        setState(() {
+          isPlaying = playerState.playing;
+        });
+      }
+    });
+  }
 
   Future<void> _togglePlayer() async {
     if (isPlaying) {
@@ -21,9 +33,6 @@ final _player = AudioPlayer();
       _player.setLoopMode(LoopMode.one);
       await _player.play();
     }
-    setState(() {
-      isPlaying = !isPlaying;
-    });
   }
 
   @override
@@ -58,7 +67,7 @@ final _player = AudioPlayer();
               onPressed: _togglePlayer,
               icon: Icon(
                 isPlaying ? Icons.pause : Icons.play_arrow,
-                color: primaryColor,
+                color: primaryColor3,
                 size: 40,
               ),
             ),

@@ -10,20 +10,29 @@ class SleepPage extends StatefulWidget {
 }
 
 class _SleepPageState extends State<SleepPage> {
-final _player = AudioPlayer();
+  final _player = AudioPlayer();
   bool isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _player.playerStateStream.listen((playerState) {
+      if (mounted) {
+        setState(() {
+          isPlaying = playerState.playing;
+        });
+      }
+    });
+  }
 
   Future<void> _togglePlayer() async {
     if (isPlaying) {
       await _player.pause();
     } else {
-      await _player.setAsset('assets/sounds/focus.mp3');
+      await _player.setAsset('assets/sounds/sleep.mp3');
       _player.setLoopMode(LoopMode.one);
       await _player.play();
     }
-    setState(() {
-      isPlaying = !isPlaying;
-    });
   }
 
   @override
