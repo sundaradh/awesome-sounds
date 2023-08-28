@@ -1,7 +1,7 @@
 import 'package:awesome_sounds/global/const.dart';
 import 'package:awesome_sounds/screens/home_page.dart';
-import 'package:awesome_sounds/screens/motivational.dart';
 import 'package:flutter/material.dart';
+import 'package:upgrader/upgrader.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // home: HomePage(),
-      home: const HomePage(),
+      home:  UpgradeAlert(child: const HomePage()) ,
       // home: OnBoard(),S
     );
   }
