@@ -3,7 +3,7 @@ package="com.adhikari.awesome_sounds">
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
   <application
-        android:label="awesome_sounds"
+        android:label="Awesome Sounds"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
     <activity
