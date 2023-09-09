@@ -2,6 +2,8 @@
 package="com.adhikari.awesome_sounds">
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+
   <application
         android:label="Awesome Sounds"
         android:name="${applicationName}"
