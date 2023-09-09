@@ -31,6 +31,15 @@ class _HomePageState extends State<HomePage> {
     'lCOF9LN_Zxs&t',
   ];
 
+  Future<void> _videoLoadingTimeout() async {
+    await Future.delayed(const Duration(seconds: 5)); // Adjust the timeout duration as needed
+    if (!_isPlayerReady) {
+      setState(() {
+        _isPlayerReady = true; // Set this to true to indicate that the loading has timed out
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +59,8 @@ class _HomePageState extends State<HomePage> {
     _idController = TextEditingController();
     _seekToController = TextEditingController();
     _playerState = PlayerState.unknown;
+
+    _videoLoadingTimeout(); // Start the video loading timeout countdown
   }
 
   void listener() {
@@ -78,233 +89,242 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-      onExitFullScreen: () {
-        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-      },
-      player: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: primaryColor3,
-        topActions: <Widget>[
-          const SizedBox(width: 8.0),
-          Expanded(
-            child: Text(
-              _controller.metadata.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-              ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.white,
-              size: 25.0,
-            ),
-            onPressed: () {
-              log('Settings Tapped!');
-            },
-          ),
-        ],
-        onReady: () {
-          _isPlayerReady = true;
-        },
-        onEnded: (data) {
-          _controller
-              .load(_ids[(_ids.indexOf(data.videoId) + 1) % _ids.length]);
-          _showSnackBar('Next Video Started!');
-        },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Awesome Sounds"),
+        backgroundColor: primaryColor3,
+        centerTitle: true,
       ),
-      builder: (context, player) => Scaffold(
-        appBar: AppBar(
-          title: const Text("Awesome Sounds"),
-          backgroundColor: primaryColor3,
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(7.0),
-                child: GridView(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    crossAxisSpacing: 5,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: GridView(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1,
+                  crossAxisSpacing: 5,
+                ),
+                children: [
+                  _buildGestureDetector(
+                      context, "Motivation", const Motivational()),
+                  _buildGestureDetector(context, "Focus", const FocusPage()),
+                  _buildGestureDetector(context, "Sleep", const SleepPage()),
+                  _buildGestureDetector(context, "Study", const Study()),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: _isPlayerReady,
+              child: YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: true,
+                progressIndicatorColor: primaryColor3,
+                topActions: <Widget>[
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: Text(
+                      _controller.metadata.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ),
-                  children: [
-                    _buildGestureDetector(
-                        context, "Motivation", const Motivational()),
-                    _buildGestureDetector(context, "Focus", const FocusPage()),
-                    _buildGestureDetector(context, "Sleep", const SleepPage()),
-                    _buildGestureDetector(context, "Study", const Study()),
-                  ],
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 25.0,
+                    ),
+                    onPressed: () {
+                      log('Settings Tapped!');
+                    },
+                  ),
+                ],
+                onReady: () {
+                  _isPlayerReady = true;
+                },
+                onEnded: (data) {
+                  _controller.load(_ids[(_ids.indexOf(data.videoId) + 1) % _ids.length]);
+                  _showSnackBar('Next Video Started!');
+                },
+              ),
+            ),
+            if (!_isPlayerReady)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    "An internet connection is required to load the video.",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 25.0,
+                    ),
+                  ),
                 ),
               ),
-              player,
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _space(10),
-                    _text('Title', _videoMetaData.title),
-                    _space(10),
-                    _text('Channel', _videoMetaData.author),
-                    _space(10),
-                    Row(
-                      children: [
-                        _text(
-                          'Playback Quality',
-                          _controller.value.playbackQuality ?? '',
-                        ),
-                        const Spacer(),
-                        _text(
-                          'Playback Rate',
-                          '${_controller.value.playbackRate}x  ',
-                        ),
-                      ],
-                    ),
-                    _space(10),
-                    TextField(
-                      enabled: _isPlayerReady,
-                      controller: _idController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Enter youtube <video id> or <link>',
-                        fillColor: primaryColor3.withOpacity(0.2),
-                        filled: true,
-                        hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: primaryColor3,
-                        ),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () => _idController.clear(),
-                        ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _space(10),
+                  _text('Title', _videoMetaData.title),
+                  _space(10),
+                  _text('Channel', _videoMetaData.author),
+                  _space(10),
+                  Row(
+                    children: [
+                      _text(
+                        'Playback Quality',
+                        _controller.value.playbackQuality ?? '',
+                      ),
+                      const Spacer(),
+                      _text(
+                        'Playback Rate',
+                        '${_controller.value.playbackRate}x  ',
+                      ),
+                    ],
+                  ),
+                  _space(10),
+                  TextField(
+                    enabled: _isPlayerReady,
+                    controller: _idController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter youtube <video id> or <link>',
+                      fillColor: primaryColor3.withOpacity(0.2),
+                      filled: true,
+                      hintStyle: const TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: primaryColor3,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () => _idController.clear(),
                       ),
                     ),
-                    _space(10),
-                    Row(
-                      children: [
-                        _loadCueButton('LOAD'),
-                        const SizedBox(width: 10.0),
-                        _loadCueButton('CUE'),
-                      ],
-                    ),
-                    _space(10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.skip_previous),
-                          onPressed: _isPlayerReady
-                              ? () => _controller.load(_ids[
-                                  (_ids.indexOf(_controller.metadata.videoId) -
-                                          1) %
-                                      _ids.length])
-                              : null,
+                  ),
+                  _space(10),
+                  Row(
+                    children: [
+                      _loadCueButton('LOAD'),
+                      const SizedBox(width: 10.0),
+                      _loadCueButton('CUE'),
+                    ],
+                  ),
+                  _space(10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.skip_previous),
+                        onPressed: _isPlayerReady
+                            ? () => _controller.load(_ids[(_ids
+                                    .indexOf(_controller.metadata.videoId) -
+                                1) %
+                                _ids.length])
+                            : null,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          _controller.value.isPlaying
+                              ? Icons.pause
+                              : Icons.play_arrow,
                         ),
-                        IconButton(
-                          icon: Icon(
-                            _controller.value.isPlaying
-                                ? Icons.pause
-                                : Icons.play_arrow,
-                          ),
-                          onPressed: _isPlayerReady
-                              ? () {
-                                  _controller.value.isPlaying
-                                      ? _controller.pause()
-                                      : _controller.play();
-                                  setState(() {});
-                                }
-                              : null,
-                        ),
-                        IconButton(
-                          icon:
-                              Icon(_muted ? Icons.volume_off : Icons.volume_up),
-                          onPressed: _isPlayerReady
-                              ? () {
-                                  _muted
-                                      ? _controller.unMute()
-                                      : _controller.mute();
+                        onPressed: _isPlayerReady
+                            ? () {
+                                _controller.value.isPlaying
+                                    ? _controller.pause()
+                                    : _controller.play();
+                                setState(() {});
+                              }
+                            : null,
+                      ),
+                      IconButton(
+                        icon:
+                            Icon(_muted ? Icons.volume_off : Icons.volume_up),
+                        onPressed: _isPlayerReady
+                            ? () {
+                                _muted
+                                    ? _controller.unMute()
+                                    : _controller.mute();
+                                setState(() {
+                                  _muted = !_muted;
+                                });
+                              }
+                            : null,
+                      ),
+                      FullScreenButton(
+                        controller: _controller,
+                        color: primaryColor3,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.skip_next),
+                        onPressed: _isPlayerReady
+                            ? () => _controller.load(_ids[(_ids
+                                    .indexOf(_controller.metadata.videoId) +
+                                1) %
+                                _ids.length])
+                            : null,
+                      ),
+                    ],
+                  ),
+                  _space(10),
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        "Volume",
+                        style: TextStyle(fontWeight: FontWeight.w300),
+                      ),
+                      Expanded(
+                        child: Slider(
+                          inactiveColor: Colors.transparent,
+                          value: _volume,
+                          min: 0.0,
+                          max: 100.0,
+                          divisions: 10,
+                          label: '${(_volume).round()}',
+                          onChanged: _isPlayerReady
+                              ? (value) {
                                   setState(() {
-                                    _muted = !_muted;
+                                    _volume = value;
                                   });
+                                  _controller.setVolume(_volume.round());
                                 }
                               : null,
                         ),
-                        FullScreenButton(
-                          controller: _controller,
-                          color: primaryColor3,
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.skip_next),
-                          onPressed: _isPlayerReady
-                              ? () => _controller.load(_ids[
-                                  (_ids.indexOf(_controller.metadata.videoId) +
-                                          1) %
-                                      _ids.length])
-                              : null,
-                        ),
-                      ],
-                    ),
-                    _space(10),
-                    Row(
-                      children: <Widget>[
-                        const Text(
-                          "Volume",
-                          style: TextStyle(fontWeight: FontWeight.w300),
-                        ),
-                        Expanded(
-                          child: Slider(
-                            inactiveColor: Colors.transparent,
-                            value: _volume,
-                            min: 0.0,
-                            max: 100.0,
-                            divisions: 10,
-                            label: '${(_volume).round()}',
-                            onChanged: _isPlayerReady
-                                ? (value) {
-                                    setState(() {
-                                      _volume = value;
-                                    });
-                                    _controller.setVolume(_volume.round());
-                                  }
-                                : null,
-                          ),
-                        ),
-                      ],
-                    ),
-                    _space(10),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 800),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: _getStateColor(_playerState),
                       ),
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        _playerState.toString(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                    ],
+                  ),
+                  _space(10),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: _getStateColor(_playerState),
                     ),
-                  ],
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      _playerState.toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -391,6 +411,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -470,5 +491,4 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-
 }
